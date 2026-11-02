@@ -17,3 +17,7 @@ A process crash before commit rolls back domain state and receipts. Local filesy
 No SOC 2 attestation, ISO 27001 certification or guarantee of sustained control operation. Samples do not establish continuous operation across an audit period. Framework references are illustrative mapping labels, not licensed framework text or an authoritative mapping. Imported observations and hashes are assertions by an authorized collector operator. The API does not independently authenticate upstream exports. Vanta exports are a supported provenance label only; there is no native Vanta account connector. GitHub branch rulesets and administrative bypass are outside the branch-protection collector scope. AWS collection observes a bucket default, not historical object encryption or key access.
 
 The audit request workflow pins explicit controls and an observation period. Fulfillment must cover that exact scope using immutable evidence records. Independent acceptance binds the fulfillment digest. Sample coverage remains distinct from sustained operation. The latest evidence also provides a next-test due timestamp.
+
+## Protocol and provider references
+
+[GitHub branch protection API](https://docs.github.com/en/rest/branches/branch-protection) defines the native endpoint observed by the optional collector. Imported framework references remain illustrative.

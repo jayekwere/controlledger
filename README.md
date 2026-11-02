@@ -84,3 +84,5 @@ The service is a bounded single-node reference implementation. It supports at mo
 See [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 The audit request workflow pins explicit controls and an observation period. Fulfillment must cover that exact scope using immutable evidence records. Independent acceptance binds the fulfillment digest. Sample coverage remains distinct from sustained operation. The latest evidence also provides a next-test due timestamp.
+
+[Native GitHub collector acceptance](docs/github-native-verification.json) records a real read against this repository. It preserves the observed failing safeguard rather than presenting collection success as control success. AWS collector acceptance remains limited to synthetic native-response contract tests.

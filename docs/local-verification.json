@@ -15,11 +15,29 @@
   "native_accounts": {
     "salesforce": "not_available",
     "vanta": "not_available",
-    "aws": "contract_tests_only"
+    "aws": "contract_tests_only",
+    "github": "read_only_acceptance_verified"
   },
   "limitations": [
     "local acceptance only",
     "no security certification",
     "no complete vulnerability guarantee"
-  ]
+  ],
+  "browser": {
+    "tests": 1,
+    "desktop": "passed",
+    "mobile_390px": "passed",
+    "mocked_responses": false
+  },
+  "container": {
+    "nonroot_uid": 10001,
+    "read_only_root": "passed",
+    "capabilities": "dropped",
+    "offline_full_demo": "passed"
+  },
+  "schemas": {
+    "actions": 9,
+    "strict_extra_fields": "forbidden"
+  },
+  "sample_sha256": "078f4efae879cf282579d10c6b69f89dabc04b4f14bbdb637eb286834439cce8"
 }

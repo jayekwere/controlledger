@@ -1,0 +1,13 @@
+{
+  "provider": "github",
+  "repository": "jayekwere/controlledger",
+  "operation": "read_only_branch_protection_observation",
+  "source_sha256": "150809bbff6494fa268d6cdad900cc121fc5c732155e92bdf21d1486f229f9b4",
+  "observed_at": "2026-11-02T01:10:04.459916+00:00",
+  "observation": false,
+  "test_scope": "branch_protection_at_least_one_required_approval_rulesets_and_bypass_not_evaluated",
+  "native_read": "verified",
+  "upstream_write": "none",
+  "interpretation": "This branch did not prove the specific required-review control. Rulesets and bypass were not evaluated.",
+  "observed_commit": "75a15b603b661308d4ca207b9fa641a1a8a68439"
+}
