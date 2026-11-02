@@ -192,3 +192,18 @@ def test_audit_request_scope_period_and_independent_acceptance() -> None:
             NOW,
         )
     assert dispatch(state, REVIEW, "accept-audit-request", approval, NOW)["status"] == "accepted"
+
+
+def test_unrelated_extra_role_cannot_expand_auditor_scope() -> None:
+    state = seed()
+    mixed = Identity(tenant="alder", subject="casey", roles=["auditor", "support"])
+    assert view(state, mixed, NOW)["controls"] == []
+    dispatch(
+        state,
+        REVIEW,
+        "grant-auditor",
+        Grant(subject="casey", controls=["control"], duration_hours=1),
+        NOW,
+    )
+    assert len(view(state, mixed, NOW)["controls"]) == 1
+    assert view(state, mixed, LATER)["controls"] == []

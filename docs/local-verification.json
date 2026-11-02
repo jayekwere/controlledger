@@ -1,7 +1,7 @@
 {
   "project": "controlledger",
   "verification_date": "2026-11-01",
-  "python_tests": 16,
+  "python_tests": 17,
   "python_statement_branch_coverage_percent": 88.22,
   "python_coverage_scope": "entire app package, including startup and optional collectors",
   "typescript_tests": 2,

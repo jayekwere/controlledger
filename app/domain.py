@@ -273,7 +273,7 @@ def view(state: dict[str, Any], actor: Identity, now: str) -> dict[str, Any]:
     if not permitted:
         raise DomainError("Role not authorized", 403)
     controls = list(state.get("control", {}).values())
-    if set(actor.roles) == {"auditor"}:
+    if not set(actor.roles) & {"operator", "reviewer"}:
         grant = state.get("grant", {}).get(actor.subject)
         allowed = grant["controls"] if grant and stamp(grant["expires_at"]) > stamp(now) else []
         controls = [c for c in controls if c["id"] in allowed]
