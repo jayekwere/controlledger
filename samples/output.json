@@ -1,0 +1,467 @@
+{
+  "mode": "synthetic-offline",
+  "transcript": [
+    {
+      "step": "Define the repository review control",
+      "result": {
+        "id": "peer-review",
+        "title": "Require independent repository review",
+        "owner": "engineering",
+        "mapping": [
+          "SOC2-CC8.1",
+          "ISO27001-A.8.32"
+        ],
+        "test": "branch-review",
+        "max_age_hours": 24,
+        "version": 1
+      }
+    },
+    {
+      "step": "Collect the failed synthetic observation",
+      "result": {
+        "evidence": {
+          "id": "evidence-failed",
+          "control_id": "peer-review",
+          "source": "synthetic-fixture",
+          "source_ref": "samples/branch-unprotected.json",
+          "source_sha256": "a9c3a6d6526ad3291934615c4b759cbe35f47e2d838171fc0792458db38c6b6b",
+          "observed_at": "2026-11-01T12:00:00Z",
+          "observation": false,
+          "sequence": 1,
+          "collected_at": "2026-11-01T12:00:00Z",
+          "collected_by": "alex",
+          "provenance": "operator_imported_export",
+          "test": "branch-review",
+          "sha256": "f98ce55fad34bd3115adc7525cce823b19ce3f5f48c87c5669c04069dc8adac1"
+        },
+        "assessment": {
+          "id": "peer-review",
+          "title": "Require independent repository review",
+          "owner": "engineering",
+          "mapping": [
+            "SOC2-CC8.1",
+            "ISO27001-A.8.32"
+          ],
+          "status": "failing",
+          "latest_evidence": "evidence-failed",
+          "sample_count": 1,
+          "next_test_due_at": "2026-11-02T12:00:00+00:00",
+          "observation_scope": "discrete_samples_only",
+          "active_exceptions": []
+        }
+      }
+    },
+    {
+      "step": "Request a short exception with compensation",
+      "result": {
+        "id": "exception-one",
+        "control_id": "peer-review",
+        "rationale": "The migration needs a temporary reviewed exception.",
+        "compensation": "A separate reviewer approves every change manually.",
+        "duration_hours": 24,
+        "requested_by": "alex",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "expires_at": "2026-11-02T12:00:00+00:00",
+        "control_digest": "de3e30e332d3a6db802844bfcc0ec0bf145affae8eefadb37ebcd31f61d937a5",
+        "status": "pending"
+      }
+    },
+    {
+      "step": "Reject approval by the requester",
+      "expected_denial": 403,
+      "reason": "Role not authorized"
+    },
+    {
+      "step": "Approve through an independent reviewer",
+      "result": {
+        "compensation": "A separate reviewer approves every change manually.",
+        "control_digest": "de3e30e332d3a6db802844bfcc0ec0bf145affae8eefadb37ebcd31f61d937a5",
+        "control_id": "peer-review",
+        "duration_hours": 24,
+        "expires_at": "2026-11-02T12:00:00+00:00",
+        "id": "exception-one",
+        "rationale": "The migration needs a temporary reviewed exception.",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "requested_by": "alex",
+        "status": "approved",
+        "approved_by": "blair",
+        "approved_at": "2026-11-01T12:00:00Z"
+      }
+    },
+    {
+      "step": "Collect the corrected safeguard observation",
+      "result": {
+        "evidence": {
+          "id": "evidence-fixed",
+          "control_id": "peer-review",
+          "source": "synthetic-fixture",
+          "source_ref": "samples/branch-protected.json",
+          "source_sha256": "e21b755ef066d7f836aa3b46b1b94c22d403e34d9c7fbd22cffc84f4711efeb5",
+          "observed_at": "2026-11-01T12:00:00Z",
+          "observation": true,
+          "sequence": 2,
+          "collected_at": "2026-11-01T12:00:00Z",
+          "collected_by": "alex",
+          "provenance": "operator_imported_export",
+          "test": "branch-review",
+          "sha256": "7b9fd442aec2d1b83ee72f32f5b66658992eba8b49d7166747342c541c49b8f0"
+        },
+        "assessment": {
+          "id": "peer-review",
+          "title": "Require independent repository review",
+          "owner": "engineering",
+          "mapping": [
+            "SOC2-CC8.1",
+            "ISO27001-A.8.32"
+          ],
+          "status": "passing",
+          "latest_evidence": "evidence-fixed",
+          "sample_count": 2,
+          "next_test_due_at": "2026-11-02T12:00:00+00:00",
+          "observation_scope": "discrete_samples_only",
+          "active_exceptions": [
+            "exception-one"
+          ]
+        }
+      }
+    },
+    {
+      "step": "Scope auditor access to one control",
+      "result": {
+        "subject": "casey",
+        "controls": [
+          "peer-review"
+        ],
+        "duration_hours": 24,
+        "expires_at": "2026-11-02T12:00:00+00:00"
+      }
+    },
+    {
+      "step": "Download the scoped audit evidence",
+      "result": {
+        "assessment": {
+          "id": "peer-review",
+          "title": "Require independent repository review",
+          "owner": "engineering",
+          "mapping": [
+            "SOC2-CC8.1",
+            "ISO27001-A.8.32"
+          ],
+          "status": "passing",
+          "latest_evidence": "evidence-fixed",
+          "sample_count": 2,
+          "next_test_due_at": "2026-11-02T12:00:00+00:00",
+          "observation_scope": "discrete_samples_only",
+          "active_exceptions": [
+            "exception-one"
+          ]
+        },
+        "evidence": [
+          {
+            "collected_at": "2026-11-01T12:00:00Z",
+            "collected_by": "alex",
+            "control_id": "peer-review",
+            "id": "evidence-failed",
+            "observation": false,
+            "observed_at": "2026-11-01T12:00:00Z",
+            "provenance": "operator_imported_export",
+            "sequence": 1,
+            "sha256": "f98ce55fad34bd3115adc7525cce823b19ce3f5f48c87c5669c04069dc8adac1",
+            "source": "synthetic-fixture",
+            "source_ref": "samples/branch-unprotected.json",
+            "source_sha256": "a9c3a6d6526ad3291934615c4b759cbe35f47e2d838171fc0792458db38c6b6b",
+            "test": "branch-review"
+          },
+          {
+            "collected_at": "2026-11-01T12:00:00Z",
+            "collected_by": "alex",
+            "control_id": "peer-review",
+            "id": "evidence-fixed",
+            "observation": true,
+            "observed_at": "2026-11-01T12:00:00Z",
+            "provenance": "operator_imported_export",
+            "sequence": 2,
+            "sha256": "7b9fd442aec2d1b83ee72f32f5b66658992eba8b49d7166747342c541c49b8f0",
+            "source": "synthetic-fixture",
+            "source_ref": "samples/branch-protected.json",
+            "source_sha256": "e21b755ef066d7f836aa3b46b1b94c22d403e34d9c7fbd22cffc84f4711efeb5",
+            "test": "branch-review"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Reject evidence access across tenants",
+      "expected_denial": 404,
+      "reason": "Record not found"
+    },
+    {
+      "step": "Open a scoped evidence request for the observation period",
+      "result": {
+        "id": "audit-request",
+        "controls": [
+          "peer-review"
+        ],
+        "assigned_to": "alex",
+        "period_start": "2026-10-30T12:00:00+00:00",
+        "period_end": "2026-11-01T12:00:00Z",
+        "due_at": "2026-11-02T12:00:00+00:00",
+        "requested_by": "blair",
+        "status": "open",
+        "fulfillment": null
+      }
+    },
+    {
+      "step": "Submit the exact observed evidence samples",
+      "result": {
+        "assigned_to": "alex",
+        "controls": [
+          "peer-review"
+        ],
+        "due_at": "2026-11-02T12:00:00+00:00",
+        "fulfillment": {
+          "evidence_ids": [
+            "evidence-failed",
+            "evidence-fixed"
+          ],
+          "evidence_sha256": [
+            "f98ce55fad34bd3115adc7525cce823b19ce3f5f48c87c5669c04069dc8adac1",
+            "7b9fd442aec2d1b83ee72f32f5b66658992eba8b49d7166747342c541c49b8f0"
+          ],
+          "submitted_by": "alex",
+          "submitted_at": "2026-11-01T12:00:00Z",
+          "sha256": "7d76878733b0e9f40d88d685051e7574155aa6acfb8ee10c524c11962bfee65c"
+        },
+        "id": "audit-request",
+        "period_end": "2026-11-01T12:00:00Z",
+        "period_start": "2026-10-30T12:00:00+00:00",
+        "requested_by": "blair",
+        "status": "submitted"
+      }
+    },
+    {
+      "step": "Independently accept the evidence request",
+      "result": {
+        "assigned_to": "alex",
+        "controls": [
+          "peer-review"
+        ],
+        "due_at": "2026-11-02T12:00:00+00:00",
+        "fulfillment": {
+          "evidence_ids": [
+            "evidence-failed",
+            "evidence-fixed"
+          ],
+          "evidence_sha256": [
+            "f98ce55fad34bd3115adc7525cce823b19ce3f5f48c87c5669c04069dc8adac1",
+            "7b9fd442aec2d1b83ee72f32f5b66658992eba8b49d7166747342c541c49b8f0"
+          ],
+          "sha256": "7d76878733b0e9f40d88d685051e7574155aa6acfb8ee10c524c11962bfee65c",
+          "submitted_at": "2026-11-01T12:00:00Z",
+          "submitted_by": "alex"
+        },
+        "id": "audit-request",
+        "period_end": "2026-11-01T12:00:00Z",
+        "period_start": "2026-10-30T12:00:00+00:00",
+        "requested_by": "blair",
+        "status": "accepted",
+        "accepted_by": "blair",
+        "accepted_at": "2026-11-01T12:00:00Z"
+      }
+    }
+  ],
+  "summary": {
+    "controls": [
+      {
+        "id": "peer-review",
+        "title": "Require independent repository review",
+        "owner": "engineering",
+        "mapping": [
+          "SOC2-CC8.1",
+          "ISO27001-A.8.32"
+        ],
+        "status": "passing",
+        "latest_evidence": "evidence-fixed",
+        "sample_count": 2,
+        "next_test_due_at": "2026-11-02T12:00:00+00:00",
+        "observation_scope": "discrete_samples_only",
+        "active_exceptions": [
+          "exception-one"
+        ]
+      }
+    ],
+    "audit_requests": [
+      {
+        "accepted_at": "2026-11-01T12:00:00Z",
+        "accepted_by": "blair",
+        "assigned_to": "alex",
+        "controls": [
+          "peer-review"
+        ],
+        "due_at": "2026-11-02T12:00:00+00:00",
+        "fulfillment": {
+          "evidence_ids": [
+            "evidence-failed",
+            "evidence-fixed"
+          ],
+          "evidence_sha256": [
+            "f98ce55fad34bd3115adc7525cce823b19ce3f5f48c87c5669c04069dc8adac1",
+            "7b9fd442aec2d1b83ee72f32f5b66658992eba8b49d7166747342c541c49b8f0"
+          ],
+          "sha256": "7d76878733b0e9f40d88d685051e7574155aa6acfb8ee10c524c11962bfee65c",
+          "submitted_at": "2026-11-01T12:00:00Z",
+          "submitted_by": "alex"
+        },
+        "id": "audit-request",
+        "period_end": "2026-11-01T12:00:00Z",
+        "period_start": "2026-10-30T12:00:00+00:00",
+        "requested_by": "blair",
+        "status": "accepted"
+      }
+    ],
+    "management": {
+      "control_count": 1,
+      "requiring_attention": [],
+      "claim": "observed_control_results_not_a_certification"
+    }
+  },
+  "evidence": {
+    "tenant": "alder",
+    "integrity": "verified_local_chain",
+    "checkpoint": "0c9f9650c0f6ae2edd0e5853bffd28dfaede6f5112e8d7444894f821853f746d",
+    "events": [
+      {
+        "payload": {
+          "action": "create-control",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "abb6cf3bcf4a7255bdd2acc8418f229de31caee40343351ad66da18e2d69a669",
+          "result_sha256": "de3e30e332d3a6db802844bfcc0ec0bf145affae8eefadb37ebcd31f61d937a5",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "ecc2e8f333190d233d4af717081e9d1554de09c462cd2e7459c1e67d1d8106d8"
+      },
+      {
+        "payload": {
+          "action": "collect-evidence",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "a4a0aa2a72e2c5e65be29c2ab06a0d57be952d5c8989865482814339d91361df",
+          "result_sha256": "9b9ffa736a47f9e27d4507690f9ad2e4872c28cf2cf9aa3a5f79f6825612cb7f",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "ecc2e8f333190d233d4af717081e9d1554de09c462cd2e7459c1e67d1d8106d8",
+        "hash": "2d12ccf602bc62983110b02e49955eb6b6921ee468b88eea8e5895fd2b2c4dab"
+      },
+      {
+        "payload": {
+          "action": "request-exception",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "afa9a829e1a74bb9cce3474f3c4432b3a38ad0b333a4791532ec9034fd0c0945",
+          "result_sha256": "82e7cabc3489ab889a7531a82faf8dbdc8151eed700876faef1801c0baf6995a",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "2d12ccf602bc62983110b02e49955eb6b6921ee468b88eea8e5895fd2b2c4dab",
+        "hash": "4d80d3bf452d1cfe1563b35c19ab9b51d8d3ea85275386e3e5cddc19e2bc607f"
+      },
+      {
+        "payload": {
+          "action": "approve-exception",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "a1fd10472b9cccdb4ab3ca0b971331520afd3a49e10db74dfa6e6a71f385d707",
+          "result_sha256": "3bcd60eaf031c2d2a8267099a7f5cc814855a54573450cffaea6a4fc06045849",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "4d80d3bf452d1cfe1563b35c19ab9b51d8d3ea85275386e3e5cddc19e2bc607f",
+        "hash": "a8a0a53a44355b0ed3e91948eb6977f08fbc822842a6628593c2c427ecfc0634"
+      },
+      {
+        "payload": {
+          "action": "collect-evidence",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "066e70a4c2656f2ca633bba668d7d150b085fe403964be7d065f7518b73c6806",
+          "result_sha256": "9341302815b94a9ae564925c1d1a656241284448d85e094aff126c88616d83d9",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "a8a0a53a44355b0ed3e91948eb6977f08fbc822842a6628593c2c427ecfc0634",
+        "hash": "3c194eac4cd9d3b8f77a4b2efe8947c06eee7e5a020113094d539912d70b5393"
+      },
+      {
+        "payload": {
+          "action": "grant-auditor",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "a5570507197f676f833b3538f61f888c21c9932dc0d0476ceeaf75a9a6cb496b",
+          "result_sha256": "047b5f8c3404faa3b255f99c344855b34fe004d5d0bb2c67bcc9f69bb501e83f",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "3c194eac4cd9d3b8f77a4b2efe8947c06eee7e5a020113094d539912d70b5393",
+        "hash": "11b3b5eef68d9d898efdba5e762a5fe47edf254c36ddb2d89b4f6faa261c4d0a"
+      },
+      {
+        "payload": {
+          "action": "download-evidence",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "38a4f06977167fa2bb570ba250fdf074505006d5a60d947f3fadebc968ab0eb0",
+          "result_sha256": "f8d9357fbb1381de58bb65aca7ba60d54f5b9a508b74387128480e43a2085818",
+          "subject": "casey",
+          "tenant": "alder"
+        },
+        "previous": "11b3b5eef68d9d898efdba5e762a5fe47edf254c36ddb2d89b4f6faa261c4d0a",
+        "hash": "e9532e1eeeaa033996c99f9aa9ddd5d882e58150e21a909a01def2f3e54a9b74"
+      },
+      {
+        "payload": {
+          "action": "create-audit-request",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "2da10c60b9902d60d565c50032a82420a16934357fed175f2a5039e66dfd2207",
+          "result_sha256": "1ce01840e9b647a1b202588c09fc9a7528c63ebce45a9104d74200f3b67abd29",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "e9532e1eeeaa033996c99f9aa9ddd5d882e58150e21a909a01def2f3e54a9b74",
+        "hash": "b702f6e9420ef4910da00a884172a070d2486adcb15327b390b3f7b1b1dd2cd7"
+      },
+      {
+        "payload": {
+          "action": "fulfill-audit-request",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "d20ed5b549b20336398611a6c340fd94085efb1c7fa6f475694b4dc56be34144",
+          "result_sha256": "ef3aae0abc7898f06c7cf53a485072875c54a49365b7e40df3e31eca3b2710ab",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "b702f6e9420ef4910da00a884172a070d2486adcb15327b390b3f7b1b1dd2cd7",
+        "hash": "d169eb598419f8109a527b9d0163e1c291738ec7303869ded4a7a94469ced30f"
+      },
+      {
+        "payload": {
+          "action": "accept-audit-request",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "b5e7d66ba22b4a168e8516e961324cdd3a6cf2e825124c80d0c0b972ce8522f7",
+          "result_sha256": "8402eff2c692e02a02214e7ae46f85e279ed0ff503c7423f6402a05c7c419aa4",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "d169eb598419f8109a527b9d0163e1c291738ec7303869ded4a7a94469ced30f",
+        "hash": "2cef06a649af1e71e0389f2c8c93e3f29acc2c090653422f9ee2e17784bb481b"
+      },
+      {
+        "payload": {
+          "action": "read-summary",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "d7b149571eead77610e840d582a19bb9543143d5009358463fb0f3423f4d4067",
+          "result_sha256": "90db07852dd724c113c25ff84679b8d32132223766e924980d2f71d168e2e2e1",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "2cef06a649af1e71e0389f2c8c93e3f29acc2c090653422f9ee2e17784bb481b",
+        "hash": "0c9f9650c0f6ae2edd0e5853bffd28dfaede6f5112e8d7444894f821853f746d"
+      }
+    ]
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "intro": "Trace a failed safeguard through evidence collection, risk review and scoped auditor access.",
+  "steps": [
+    {
+      "id": "control",
+      "title": "Define the repository review control",
+      "action": "create-control",
+      "data": {
+        "id": "peer-review",
+        "title": "Require independent repository review",
+        "owner": "engineering",
+        "mapping": [
+          "SOC2-CC8.1",
+          "ISO27001-A.8.32"
+        ],
+        "test": "branch-review",
+        "max_age_hours": 24
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "failed",
+      "title": "Collect the failed synthetic observation",
+      "action": "collect-evidence",
+      "data": {
+        "id": "evidence-failed",
+        "control_id": "peer-review",
+        "source": "synthetic-fixture",
+        "source_ref": "samples/branch-unprotected.json",
+        "source_sha256": "a9c3a6d6526ad3291934615c4b759cbe35f47e2d838171fc0792458db38c6b6b",
+        "observed_at": "$now",
+        "observation": false
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "exception",
+      "title": "Request a short exception with compensation",
+      "action": "request-exception",
+      "data": {
+        "id": "exception-one",
+        "control_id": "peer-review",
+        "rationale": "The migration needs a temporary reviewed exception.",
+        "compensation": "A separate reviewer approves every change manually.",
+        "duration_hours": 24
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "self",
+      "title": "Reject approval by the requester",
+      "action": "approve-exception",
+      "data": {
+        "id": "exception-one"
+      },
+      "identity": "demo-operator",
+      "expect_error": 403
+    },
+    {
+      "id": "approved",
+      "title": "Approve through an independent reviewer",
+      "action": "approve-exception",
+      "data": {
+        "id": "exception-one"
+      },
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "fixed",
+      "title": "Collect the corrected safeguard observation",
+      "action": "collect-evidence",
+      "data": {
+        "id": "evidence-fixed",
+        "control_id": "peer-review",
+        "source": "synthetic-fixture",
+        "source_ref": "samples/branch-protected.json",
+        "source_sha256": "e21b755ef066d7f836aa3b46b1b94c22d403e34d9c7fbd22cffc84f4711efeb5",
+        "observed_at": "$now",
+        "observation": true
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "grant",
+      "title": "Scope auditor access to one control",
+      "action": "grant-auditor",
+      "data": {
+        "subject": "casey",
+        "controls": [
+          "peer-review"
+        ],
+        "duration_hours": 24
+      },
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "download",
+      "title": "Download the scoped audit evidence",
+      "action": "download-evidence",
+      "data": {
+        "control_id": "peer-review"
+      },
+      "identity": "demo-auditor"
+    },
+    {
+      "id": "boundary",
+      "title": "Reject evidence access across tenants",
+      "action": "download-evidence",
+      "data": {
+        "control_id": "peer-review"
+      },
+      "identity": "demo-other",
+      "expect_error": 404
+    },
+    {
+      "id": "auditrequest",
+      "title": "Open a scoped evidence request for the observation period",
+      "action": "create-audit-request",
+      "data": {
+        "id": "audit-request",
+        "controls": [
+          "peer-review"
+        ],
+        "assigned_to": "alex",
+        "period_start": "$past",
+        "period_end": "$now",
+        "due_at": "$future"
+      },
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "fulfillment",
+      "title": "Submit the exact observed evidence samples",
+      "action": "fulfill-audit-request",
+      "data": {
+        "id": "audit-request",
+        "evidence_ids": [
+          "evidence-failed",
+          "evidence-fixed"
+        ]
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "accepted",
+      "title": "Independently accept the evidence request",
+      "action": "accept-audit-request",
+      "data": {
+        "id": "audit-request",
+        "fulfillment_sha256": "$fulfillment.fulfillment.sha256"
+      },
+      "identity": "demo-reviewer"
+    }
+  ]
+}

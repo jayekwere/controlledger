@@ -1,0 +1,323 @@
+{
+  "create-control": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "title": {
+        "maxLength": 160,
+        "minLength": 5,
+        "title": "Title",
+        "type": "string"
+      },
+      "owner": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Owner",
+        "type": "string"
+      },
+      "mapping": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 8,
+        "minItems": 1,
+        "title": "Mapping",
+        "type": "array"
+      },
+      "test": {
+        "enum": [
+          "branch-review",
+          "storage-encryption",
+          "workforce-mfa"
+        ],
+        "title": "Test",
+        "type": "string"
+      },
+      "max_age_hours": {
+        "maximum": 2160,
+        "minimum": 1,
+        "title": "Max Age Hours",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "id",
+      "title",
+      "owner",
+      "mapping",
+      "test",
+      "max_age_hours"
+    ],
+    "title": "Control",
+    "type": "object"
+  },
+  "collect-evidence": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "control_id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Control Id",
+        "type": "string"
+      },
+      "source": {
+        "enum": [
+          "synthetic-fixture",
+          "github-export",
+          "aws-export",
+          "vanta-export"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "source_ref": {
+        "maxLength": 240,
+        "minLength": 1,
+        "title": "Source Ref",
+        "type": "string"
+      },
+      "source_sha256": {
+        "pattern": "^[a-f0-9]{64}$",
+        "title": "Source Sha256",
+        "type": "string"
+      },
+      "observed_at": {
+        "maxLength": 40,
+        "minLength": 20,
+        "title": "Observed At",
+        "type": "string"
+      },
+      "observation": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Observation"
+      }
+    },
+    "required": [
+      "id",
+      "control_id",
+      "source",
+      "source_ref",
+      "source_sha256",
+      "observed_at",
+      "observation"
+    ],
+    "title": "Evidence",
+    "type": "object"
+  },
+  "request-exception": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "control_id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Control Id",
+        "type": "string"
+      },
+      "rationale": {
+        "maxLength": 500,
+        "minLength": 20,
+        "title": "Rationale",
+        "type": "string"
+      },
+      "compensation": {
+        "maxLength": 500,
+        "minLength": 20,
+        "title": "Compensation",
+        "type": "string"
+      },
+      "duration_hours": {
+        "maximum": 720,
+        "minimum": 1,
+        "title": "Duration Hours",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "id",
+      "control_id",
+      "rationale",
+      "compensation",
+      "duration_hours"
+    ],
+    "title": "ExceptionRequest",
+    "type": "object"
+  },
+  "approve-exception": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id"
+    ],
+    "title": "Ref",
+    "type": "object"
+  },
+  "grant-auditor": {
+    "additionalProperties": false,
+    "properties": {
+      "subject": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Subject",
+        "type": "string"
+      },
+      "controls": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 50,
+        "minItems": 1,
+        "title": "Controls",
+        "type": "array"
+      },
+      "duration_hours": {
+        "maximum": 168,
+        "minimum": 1,
+        "title": "Duration Hours",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "subject",
+      "controls",
+      "duration_hours"
+    ],
+    "title": "Grant",
+    "type": "object"
+  },
+  "download-evidence": {
+    "additionalProperties": false,
+    "properties": {
+      "control_id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Control Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "control_id"
+    ],
+    "title": "Download",
+    "type": "object"
+  },
+  "create-audit-request": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "controls": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 30,
+        "minItems": 1,
+        "title": "Controls",
+        "type": "array"
+      },
+      "assigned_to": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Assigned To",
+        "type": "string"
+      },
+      "period_start": {
+        "maxLength": 40,
+        "minLength": 20,
+        "title": "Period Start",
+        "type": "string"
+      },
+      "period_end": {
+        "maxLength": 40,
+        "minLength": 20,
+        "title": "Period End",
+        "type": "string"
+      },
+      "due_at": {
+        "maxLength": 40,
+        "minLength": 20,
+        "title": "Due At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "controls",
+      "assigned_to",
+      "period_start",
+      "period_end",
+      "due_at"
+    ],
+    "title": "AuditRequest",
+    "type": "object"
+  },
+  "fulfill-audit-request": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "evidence_ids": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 100,
+        "minItems": 1,
+        "title": "Evidence Ids",
+        "type": "array"
+      }
+    },
+    "required": [
+      "id",
+      "evidence_ids"
+    ],
+    "title": "Fulfillment",
+    "type": "object"
+  },
+  "accept-audit-request": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "fulfillment_sha256": {
+        "pattern": "^[a-f0-9]{64}$",
+        "title": "Fulfillment Sha256",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "fulfillment_sha256"
+    ],
+    "title": "AcceptRequest",
+    "type": "object"
+  }
+}
