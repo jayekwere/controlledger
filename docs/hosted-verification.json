@@ -1,9 +1,9 @@
 {
   "repository": "https://github.com/jayekwere/controlledger",
-  "verified_commit": "75a15b603b661308d4ca207b9fa641a1a8a68439",
+  "verified_commit": "94eff7ba857ebee2d62135cdd2d9150f21b11fbc",
   "workflow": "Verify",
-  "run_id": 41370988268,
-  "url": "https://github.com/jayekwere/controlledger/actions/runs/41370988268",
+  "run_id": 41371614003,
+  "url": "https://github.com/jayekwere/controlledger/actions/runs/41371614003",
   "conclusion": "success",
   "jobs": [
     {
@@ -43,7 +43,7 @@
           "conclusion": "success"
         },
         {
-          "name": "Run python -m ruff check app tests && python -m ruff format --check app tests",
+          "name": "Run python -m ruff check app tests scripts && python -m ruff format --check app tests scripts",
           "conclusion": "success"
         },
         {
@@ -87,6 +87,10 @@
           "conclusion": "success"
         },
         {
+          "name": "Validate public evidence boundary",
+          "conclusion": "success"
+        },
+        {
           "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
           "conclusion": "success"
         },
@@ -111,11 +115,11 @@
   ],
   "artifacts": [
     {
-      "id": 13108254388,
+      "id": 13109940470,
       "name": "verification-evidence",
-      "digest": "sha256:9fde6ee66b50ed8f0391b0d6a26508344147b39ec6ac75cd006a482210cb8160",
-      "size_bytes": 221485,
-      "expires_at": "2026-11-16T01:11:26Z"
+      "digest": "sha256:3d7cdd62396cb64d2ef56a447fd56d8a4c72e04a189d1a37e1977e282a73a357",
+      "size_bytes": 218392,
+      "expires_at": "2026-11-16T01:17:49Z"
     }
   ],
   "scope": "Actual hosted tests, exact or semantic demo checks, browser, runtime dependency advisories and restricted container checks at verified_commit. Documentation updates can have later commits."

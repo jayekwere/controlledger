@@ -11,3 +11,5 @@ The restricted Docker smoke check verifies a non-root UID, HTTP response and con
 [Hosted Verify run 41370988268](https://github.com/jayekwere/controlledger/actions/runs/41370988268) passed at `75a15b603b661308d4ca207b9fa641a1a8a68439`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).
 
 Public CI artifacts use an explicit file allowlist and reject private-key markers. Browser state stays outside that public evidence set.
+
+[Hosted Verify run 41371614003](https://github.com/jayekwere/controlledger/actions/runs/41371614003) passed at `94eff7ba857ebee2d62135cdd2d9150f21b11fbc`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).
